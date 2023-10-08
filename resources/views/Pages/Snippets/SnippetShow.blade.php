@@ -47,7 +47,7 @@
                     </div>
 
 
-                    <textarea   name="Code" id="CodeShow" class="form-control"> {{$getSelectedSnippets->Snippets}}</textarea>
+                    <textarea   name="Code" id="CodeShow" class="form-control"> {!! $getSelectedSnippets->Snippets !!}</textarea>
                 </div>
             </div>
         </div>
