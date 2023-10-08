@@ -28,7 +28,8 @@ class SnippetsController extends Controller
         ]);
 
         // Escape the "code" input using htmlspecialchars
-        $escapedCode = htmlspecialchars($validatedData['Code'], ENT_QUOTES, 'UTF-8');
+        $escapedCode = urlencode($validatedData['Code']);
+
 
         $data = new Snippets();
 
