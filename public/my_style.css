@@ -1,0 +1,36 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.my_slidebar
+{
+   height: 92vh;
+    border: 1px solid lightgrey;
+}
+
+.my_slidebar .card
+{
+    /*border-left: 3px solid lightskyblue !important;*/
+    box-shadow: lightskyblue;
+    cursor: pointer;
+}
+
+
+
+.editDeleteBtn
+{
+    color: #a2a2a2;
+    padding: 5px;
+}
+
+.editDeleteBtn:hover
+{
+    color:black;
+}
+
+
+
+
