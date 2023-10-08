@@ -68,8 +68,8 @@
             height="60" width="60">
     </div>
 
-@include('template.components.navbar')
-@include('template.components.slidebar')
+@include('Template.components.navbar')
+@include('Template.components.slidebar')
 
 
 <div class="content-wrapper">
