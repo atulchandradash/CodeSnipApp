@@ -21,16 +21,19 @@ class SnippetsController extends Controller
     public function create(Request $request)
     {
 
-        $request->validate([
+        $validatedData = $request->validate([
             'Title' => 'required|min:5',
             'Code' => 'required|min:15',
             'Folder' => 'required'
         ]);
 
+        // Escape the "code" input using htmlspecialchars
+        $escapedCode = htmlspecialchars($validatedData['Code'], ENT_QUOTES, 'UTF-8');
+
         $data = new Snippets();
 
         $data->Title = $request->input('Title');
-        $data->Snippets = $request->input('Code');
+        $data->Snippets = $escapedCode;
         $data->Folder_id = $request->input('Folder');
         $data->User_id = Auth::user()->id;
 
