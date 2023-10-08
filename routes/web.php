@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SnippetsController;
+use App\Models\Snippets;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,18 +18,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', function () {
+    $getSnippets =  Snippets::where('User_id', Auth::user()->id)->get();
+    return view('Pages.HomePage.home', ['getSnippets' => $getSnippets ]);
+})->middleware(['auth', 'verified'])->name('Home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //snippets Create
+    Route::get('/SnippetsCreate', [SnippetsController::class, 'index'])->name('Snippets.index');
+    Route::Post('/SnippetsCreate', [SnippetsController::class, 'create'])->name('Snippets.create');
+    Route::get('/SnippetsShow={id}', [SnippetsController::class, 'show'])->name('Snippets.show');
+    Route::get('/SnippetsEdit={id}', [SnippetsController::class, 'updateShow'])->name('Snippets.updateShow');
+    Route::post('/SnippetsEdit={id}', [SnippetsController::class, 'update'])->name('Snippets.update');
+    Route::get('/SnippetsDelete={id}', [SnippetsController::class, 'DeleteIndex'])->name('Snippets.DeleteIndex');
+    Route::delete('/SnippetsDelete={id}', [SnippetsController::class, 'destroy'])->name('Snippets.destroy');
+
+    //FolderCreate Route
+    Route::get('/FolderCreate', [FolderController::class, 'index'])->name('Folder.index');
+    Route::post('/FolderCreate', [FolderController::class, 'create'])->name('Folder.create');
+    Route::get('/FolderID={id}', [FolderController::class, 'show'])->name('Folder.show');
+    Route::get('/FolderID={id}/SnippetsID={s_id}', [FolderController::class, 'SnippetsShow'])->name('Folder.SnippetsShow');
+    Route::get('/FolderID={id}/SnippetsID={s_id}/edit', [FolderController::class, 'SnippetsEdit'])->name('Folder.SnippetsEdit');
+    Route::get('/FolderID={id}/SnippetsID={s_id}/delete', [FolderController::class, 'SnippetsDelete'])->name('Folder.SnippetsDelete');
 });
 
 require __DIR__.'/auth.php';
