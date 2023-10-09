@@ -119,12 +119,17 @@
 
 
     <script>
+        function customEncodeURIComponent(str) {
+            return encodeURIComponent(str).replace(/[()]/g, function(c) {
+                return '%' + c.charCodeAt(0).toString(16);
+            });
+        }
         $(document).ready(function () {
             $('#createForm').submit(function (e) {
                 e.preventDefault(); // Prevent the default form submission
 
                 // Get the value of the textarea and encode it
-                var codeValue = encodeURIComponent($('#Code').val());
+                var codeValue = customEncodeURIComponent($('#Code').val());
 
                 // Set the encoded value to the hidden input field
                 $('#EncodedCode').val(codeValue);
