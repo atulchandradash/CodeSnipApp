@@ -45,7 +45,8 @@
                             </button>
                         </div>
                     @endif
-                    <form action="{{route('Snippets.create')}}" method="post">
+
+                    <form id="createForm" action="{{route('Snippets.create')}}" method="post">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-8">
@@ -80,7 +81,8 @@
 
                         <div class="form-group">
                             <label style="color: #a2a2a2" for="Code" >Code</label>
-                            <textarea name="Code" id="Code" class="form-control
+                            <input type="hidden" name="EncodedCode" id="EncodedCode" />
+                            <textarea  id="Code" class="form-control
                             {{$errors->has('Code') ? 'is-invalid' : ''}}">{{old('Code')}} </textarea>
                             @if($errors->has('Code'))
                                 <div class="invalid-feedback">
@@ -98,3 +100,7 @@
         </div>
     </div>
 @endsection
+
+
+
+

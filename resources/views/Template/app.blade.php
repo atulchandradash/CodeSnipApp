@@ -58,6 +58,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/mode/php/php.min.js" integrity="sha512-jZGz5n9AVTuQGhKTL0QzOm6bxxIQjaSbins+vD3OIdI7mtnmYE6h/L+UBGIp/SssLggbkxRzp9XkQNA4AyjFBw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.15/keymap/sublime.min.js" integrity="sha512-SV3qeFFtzcmGtUQPLM7HLy/7GKJ/x3c2PdiF5GZQnbHzIlI2q7r77y0IgLLbBDeHiNfCSBYDQt898Xp0tcZOeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 
@@ -117,9 +118,25 @@
 <script src="{{ asset('AdminLET/dist/js/adminlte.js') }}"></script>
 
 
+    <script>
+        $(document).ready(function () {
+            $('#createForm').submit(function (e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                // Get the value of the textarea and encode it
+                var codeValue = encodeURIComponent($('#Code').val());
+
+                // Set the encoded value to the hidden input field
+                $('#EncodedCode').val(codeValue);
+
+                // Continue with the form submission
+                this.submit();
+            });
+        });
+    </script>
+
 
     <script>
-        // Initialize CodeMirror
         var editor = CodeMirror.fromTextArea(document.getElementById("Code"), {
             lineNumbers: true,
             mode: "text/x-php", // Example mode: C/C++
@@ -127,6 +144,7 @@
             autofocus: true,
             // Other configuration options here
         })
+
     </script>
 
     <script>
