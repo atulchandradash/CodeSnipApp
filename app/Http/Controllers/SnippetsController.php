@@ -66,7 +66,7 @@ class SnippetsController extends Controller
     {
         $request->validate([
             'Title' => 'required|min:5',
-            'Code' => 'required|min:15',
+            'EncodedCode' => 'required|min:15',
             'Folder' => 'required'
         ]);
 
@@ -75,7 +75,7 @@ class SnippetsController extends Controller
         $data = Snippets::find($id);
 
         $data->Title = $request->input('Title');
-        $data->Snippets = $request->input('Code');
+        $data->Snippets = $request->input('EncodedCode');
         $data->Folder_id = $request->input('Folder');
 
         $data->save();
