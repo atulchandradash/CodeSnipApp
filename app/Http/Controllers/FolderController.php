@@ -96,6 +96,54 @@ class FolderController extends Controller
 
 
 
+    public function rename($id)
+    {
+        $getFolderInfo = Folder::find($id);
+        $getFolderSnippets =  Snippets::where('User_id', Auth::user()->id)
+            ->where('Folder_id', $id)->get();
+
+
+        return view('Pages.FolderPage.FolderEdit', ['getFolderSnippets' => $getFolderSnippets, 'getFolderInfo' => $getFolderInfo]);
+    }
+
+
+    public function renamePost(Request $request,$id)
+    {
+        $request->validate(
+            [
+                'folder_name' => 'required|min:3'
+            ]
+        );
+
+        $data = Folder::find($id);
+        $data->Name = $request->input('folder_name');
+        $data->save();
+
+        return redirect()->back();
+    }
+
+
+
+    public function deleteIndex($id)
+    {
+        $getFolderInfo = Folder::find($id);
+        $getFolderSnippets =  Snippets::where('User_id', Auth::user()->id)
+            ->where('Folder_id', $id)->get();
+
+
+        return view('Pages.FolderPage.FolderDelete', ['getFolderSnippets' => $getFolderSnippets, 'getFolderInfo' => $getFolderInfo]);
+    }
+
+    public function destroy($id)
+    {
+       $data = Folder::find($id);
+
+       $data->delete();
+
+       return redirect()->route('Home');
+    }
+
+
 
 
 
