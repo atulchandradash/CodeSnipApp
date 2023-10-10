@@ -50,7 +50,7 @@
                             </button>
                         </div>
                     @endif
-                    <form action="{{route('Snippets.update', ['id' => $getSelectedSnippets->id])}}" method="post">
+                    <form  id="createForm"  action="{{route('Snippets.update', ['id' => $getSelectedSnippets->id])}}" method="post">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-8">
@@ -85,8 +85,9 @@
 
                         <div class="form-group">
                             <label style="color: #a2a2a2" for="Code" >Code</label>
+                            <input type="hidden" name="EncodedCode" id="EncodedCode" />
                             <textarea name="Code" id="Code" class="form-control
-                            {{$errors->has('Code') ? 'is-invalid' : ''}}">{{$getSelectedSnippets->Snippets}} </textarea>
+                            {{$errors->has('Code') ? 'is-invalid' : ''}}">{{base64_decode($getSelectedSnippets->Snippets)}} </textarea>
                             @if($errors->has('Code'))
                                 <div class="invalid-feedback">
                                     {{$errors->first('Code')}}
