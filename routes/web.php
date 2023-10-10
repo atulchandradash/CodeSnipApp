@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/FolderID={id}/SnippetsID={s_id}', [FolderController::class, 'SnippetsShow'])->name('Folder.SnippetsShow');
     Route::get('/FolderID={id}/SnippetsID={s_id}/edit', [FolderController::class, 'SnippetsEdit'])->name('Folder.SnippetsEdit');
     Route::get('/FolderID={id}/SnippetsID={s_id}/delete', [FolderController::class, 'SnippetsDelete'])->name('Folder.SnippetsDelete');
+    Route::get('/FolderRename={id}', [FolderController::class, 'rename'])->name('Folder.rename');
+    Route::post('/FolderRename={id}', [FolderController::class, 'renamePost'])->name('Folder.renamePost');
+    Route::get('/FolderDelete={id}', [FolderController::class, 'deleteIndex'])->name('Folder.delete');
+    Route::delete('/FolderDelete={id}', [FolderController::class, 'destroy'])->name('Folder.destroy');
 });
 
 require __DIR__.'/auth.php';

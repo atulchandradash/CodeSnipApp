@@ -9,8 +9,8 @@
             <div class="p-2 d-flex justify-content-between" style="border-bottom: 1px solid lightgrey">
                 <span >{{$getFolderInfo->Name}}</span>
                 <div>
-                    <a href="{{route('Folder.rename' , ['id' =>$getFolderInfo->id ] )}}"  class="editDeleteBtn"><i class="fa-solid fa-file-pen "></i></a>
-                    <a href="{{route('Folder.delete' , ['id' =>$getFolderInfo->id ] )}}"  class="editDeleteBtn"><i class="fa-solid fa-trash "></i></a>
+                    <a href="#"  class="editDeleteBtn"><i class="fa-solid fa-file-pen "></i></a>
+                    <a href="#"  class="editDeleteBtn"><i class="fa-solid fa-trash "></i></a>
                 </div>
             </div>
             @if(count($getFolderSnippets) > 0)
@@ -39,10 +39,24 @@
 
         {{--main part--}}
         <div class="col-md-9">
-            <div style="height: 85vh; width: 100%;border: 1px solid lightgrey" class="d-flex align-items-center text-center ">
-                <div class="container-fluid ">
-                    <h4>Welcome to your dashboard!</h4>
-                    <a href="{{route('Snippets.index')}}" class="btn btn-dark">Create new Snippets</a>
+            <div style="height: 92vh; width: 100%; border: 1px solid lightgrey" class="d-flex align-items-center">
+                <div class="container-fluid">
+                    <div class="row justify-content-center"> <!-- Added justify-content-center class here -->
+                        <form action="{{route('Folder.delete', ['id'=> $getFolderInfo->id])}}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <div class="col card shadow" style="border: 1px solid lightgrey">
+                                <div class="container m-2 p-5">
+                                    <h5>{{$getFolderInfo->Name}}</h5>
+                                    <h6 class="text-center">Are You Sure?</h6>
+                                    <div class="d-flex justify-content-center mt-3"> <!-- Added this container for centering buttons -->
+                                        <button class="btn btn-dark mr-2" type="submit">Delete Now</button>
+                                        <button class="btn btn-secondary" type="submit">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
